@@ -153,19 +153,6 @@ export function LoginForm() {
           </Button>
         </form>
 
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t border-white/10" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-black/70 px-2 text-gray-400">Or continue with</span>
-          </div>
-        </div>
-
-        <Button type="button" variant="outline" className="w-full bg-black/60 hover:bg-black border-white/10 text-white/80 cursor-pointer">
-          Continue with Google
-        </Button>
-
         <div className="text-center text-sm text-gray-400">
           Don't have an account?{" "}
           <NavLink to="/signup" className="text-white hover:text-gray-200 font-medium">
