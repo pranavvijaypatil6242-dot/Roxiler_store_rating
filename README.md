@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Store Rating Web App
 
 ## Project Description
@@ -81,3 +82,6 @@ For example:
 ---
 
 ##
+=======
+# Roxiler_store_rating
+>>>>>>> 52620a50fd05383b88c8bcb660aa53968afd0605

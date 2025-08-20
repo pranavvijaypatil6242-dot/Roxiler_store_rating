@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import { Input } from "../components/Input";
 import { Label } from "../components/Label";
 import { Alert, AlertDescription } from "../components/Alert";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Loader2 } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -82,12 +82,12 @@ export function LoginForm() {
   };
 
   return (
-    <Card className="shadow-xl border-0">
+    <Card className="shadow-2xl border border-white/10 bg-black/70 backdrop-blur text-white/80">
       <CardHeader className="space-y-1 text-center">
-        <CardTitle className="text-2xl font-bold text-slate-800">Welcome Back</CardTitle>
-        <CardDescription className="text-slate-600">Sign in to your account to continue</CardDescription>
+        <CardTitle className="text-2xl font-bold text-white">Welcome Back</CardTitle>
+        <CardDescription className="text-gray-400">Sign in to your account to continue</CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-5">
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
             <Alert variant="destructive">
@@ -96,11 +96,11 @@ export function LoginForm() {
           )}
 
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-slate-700">
+            <Label htmlFor="email" className="text-gray-300">
               Email
             </Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+              <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
               <Input
                 id="email"
                 name="email"
@@ -108,18 +108,18 @@ export function LoginForm() {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleInputChange}
-                className="pl-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 border-gray-700 focus:border-white focus:ring-white bg-black/60 text-white placeholder:text-gray-500"
                 required
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-slate-700">
+            <Label htmlFor="password" className="text-gray-300">
               Password
             </Label>
             <div className="relative">
-              <Lock className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-500" />
               <Input
                 id="password"
                 name="password"
@@ -127,27 +127,48 @@ export function LoginForm() {
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={handleInputChange}
-                className="pl-10 pr-10 border-slate-200 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 pr-10 border-gray-700 focus:border-white focus:ring-white bg-black/60 text-white placeholder:text-gray-500"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-slate-400 hover:text-slate-600"
+                className="absolute right-3 top-3 text-gray-500 hover:text-gray-300"
               >
                 {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
             </div>
           </div>
 
-          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white cursor-pointer" disabled={isLoading}>
-            {isLoading ? "Signing in..." : "Sign In"}
+          <div className="flex items-center justify-between text-sm">
+            <label className="inline-flex items-center gap-2 text-gray-400">
+              <input type="checkbox" className="accent-white" />
+              Remember me
+            </label>
+            <NavLink to="#" className="text-gray-300 hover:text-white">Forgot password?</NavLink>
+          </div>
+
+          <Button type="submit" className="w-full bg-white hover:bg-gray-200 text-black cursor-pointer" disabled={isLoading}>
+            {isLoading ? <span className="inline-flex items-center gap-2"><Loader2 className="h-4 w-4 animate-spin" /> Signing in...</span> : "Sign In"}
           </Button>
         </form>
 
-        <div className="text-center text-sm text-slate-600">
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t border-white/10" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-black/70 px-2 text-gray-400">Or continue with</span>
+          </div>
+        </div>
+
+        <Button type="button" variant="outline" className="w-full bg-black/60 hover:bg-black border-white/10 text-white/80 cursor-pointer">
+          Continue with Google
+        </Button>
+
+        <div className="text-center text-sm text-gray-400">
           Don't have an account?{" "}
-          <NavLink to="/signup" className="text-blue-600 hover:text-blue-700 font-medium">
+          <NavLink to="/signup" className="text-white hover:text-gray-200 font-medium">
             Sign up
           </NavLink>
         </div>

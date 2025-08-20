@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        import React, { useState, useEffect } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/Card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/Tabs"
 import { Button } from "../components/Button"
@@ -17,7 +17,7 @@ import {
 import { Label } from "../components/Label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/Select"
 import { Textarea } from "../components/Textarea"
-import { Users, Store, Star, MoreHorizontal, Search, TrendingUp, Shield, LogOut, Plus } from "lucide-react"
+import { Users, Store, Star, MoreHorizontal, Search, TrendingUp, Shield, LogOut, Plus, Sparkles, BarChart3, LayoutGrid } from "lucide-react"
 import { isAuthenticated } from "../Auth/auth";
 import axios from "axios"
 
@@ -361,71 +361,107 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen relative bg-gradient-to-br from-indigo-50 via-white to-pink-50">
+      {/* Decorative background */}
+      <div className="pointer-events-none absolute inset-0 [background:radial-gradient(800px_circle_at_20%_-10%,rgba(99,102,241,0.15),transparent_40%),radial-gradient(600px_circle_at_90%_10%,rgba(236,72,153,0.12),transparent_40%)]" />
+
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-3">
-              <Shield className="h-8 w-8 text-blue-600" />
-              <h1 className="text-xl font-semibold text-gray-900">Admin Dashboard</h1>
+              <Shield className="h-8 w-8 text-white/90" />
+              <div>
+                <h1 className="text-xl font-semibold">Admin Dashboard</h1>
+                <p className="text-xs text-white/80">Manage users, stores and ratings at a glance</p>
+              </div>
             </div>
-            <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2 bg-transparent cursor-pointer">
+            <Button
+              variant="outline"
+              onClick={handleLogout}
+              className="flex items-center gap-2 bg-white/0 border-white/30 text-white hover:bg-white/10 cursor-pointer"
+            >
               <LogOut className="h-4 w-4" /> Logout
             </Button>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Quick actions */}
+        <Card className="border-0 bg-white/70 backdrop-blur shadow-md">
+          <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between pb-2">
+            <div className="flex items-center gap-2 text-indigo-700">
+              <Sparkles className="h-5 w-5" />
+              <CardTitle className="text-base">Quick Actions</CardTitle>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-500 hover:to-purple-500" onClick={() => setIsAddUserOpen(true)}>
+                <Users className="h-4 w-4" /> Add User
+              </Button>
+              <Button className="bg-gradient-to-r from-pink-600 to-rose-600 text-white hover:from-pink-500 hover:to-rose-500" onClick={() => setIsAddStoreOpen(true)}>
+                <Store className="h-4 w-4" /> Add Store
+              </Button>
+            </div>
+          </CardHeader>
+        </Card>
+
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 mt-6">
+          <Card className="bg-gradient-to-br from-indigo-500 to-purple-500 text-white border-0 shadow-md hover:shadow-lg transition">
             <CardHeader className="flex justify-between pb-2">
               <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
+              <div className="bg-white/20 p-2 rounded-lg">
+                <Users className="h-4 w-4 text-white" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{users.length}</div>
-              <p className="text-xs text-muted-foreground">Total registered users</p>
+              <div className="text-3xl font-bold">{users.length}</div>
+              <p className="text-xs text-white/80">Total registered users</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-gradient-to-br from-emerald-500 to-teal-500 text-white border-0 shadow-md hover:shadow-lg transition">
             <CardHeader className="flex justify-between pb-2">
               <CardTitle className="text-sm font-medium">Active Stores</CardTitle>
-              <Store className="h-4 w-4 text-muted-foreground" />
+              <div className="bg-white/20 p-2 rounded-lg">
+                <Store className="h-4 w-4 text-white" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stores.length}</div>
-              <p className="text-xs text-muted-foreground">Currently active stores</p>
+              <div className="text-3xl font-bold">{stores.length}</div>
+              <p className="text-xs text-white/80">Currently active stores</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-gradient-to-br from-amber-500 to-orange-500 text-white border-0 shadow-md hover:shadow-lg transition">
             <CardHeader className="flex justify-between pb-2">
               <CardTitle className="text-sm font-medium">Total Ratings</CardTitle>
-              <Star className="h-4 w-4 text-muted-foreground" />
+              <div className="bg-white/20 p-2 rounded-lg">
+                <Star className="h-4 w-4 text-white" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{ratings.length}</div>
-              <p className="text-xs text-muted-foreground">Total user ratings</p>
+              <div className="text-3xl font-bold">{ratings.length}</div>
+              <p className="text-xs text-white/80">Total user ratings</p>
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-gradient-to-br from-fuchsia-500 to-pink-500 text-white border-0 shadow-md hover:shadow-lg transition">
             <CardHeader className="flex justify-between pb-2">
               <CardTitle className="text-sm font-medium">Avg Rating</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+              <div className="bg-white/20 p-2 rounded-lg">
+                <TrendingUp className="h-4 w-4 text-white" />
+              </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">
+              <div className="text-3xl font-bold">
                 {ratings.length > 0 
                   ? (ratings.reduce((acc, rating) => acc + rating.rating_value, 0) / ratings.length).toFixed(1)
                   : "0.0"
                 }
               </div>
-              <p className="text-xs text-muted-foreground">Average rating score</p>
+              <p className="text-xs text-white/80">Average rating score</p>
             </CardContent>
           </Card>
         </div>
@@ -433,10 +469,22 @@ export default function AdminDashboard() {
         {/* Management Tabs */}
         {/* make this responsive */}
         <Tabs defaultValue="users" className="space-y-6 ">
-          <TabsList className="grid w-full grid-cols-3  ">
-            <TabsTrigger value="users">User Management</TabsTrigger>
-            <TabsTrigger value="stores">Store Management</TabsTrigger>
-            <TabsTrigger value="ratings">Rating Management</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 bg-white/70 backdrop-blur border rounded-xl p-1 shadow-sm">
+            <TabsTrigger value="users" className="data-[state=active]:text-white data-[state=active]:bg-gradient-to-r from-indigo-500 to-purple-500">
+              <LayoutGrid className="h-4 w-4" />
+              <span>User Management</span>
+              <Badge className="ml-2" variant="secondary">{users.length}</Badge>
+            </TabsTrigger>
+            <TabsTrigger value="stores" className="data-[state=active]:text-white data-[state=active]:bg-gradient-to-r from-emerald-500 to-teal-500">
+              <Store className="h-4 w-4" />
+              <span>Store Management</span>
+              <Badge className="ml-2" variant="secondary">{stores.length}</Badge>
+            </TabsTrigger>
+            <TabsTrigger value="ratings" className="data-[state=active]:text-white data-[state=active]:bg-gradient-to-r from-amber-500 to-orange-500">
+              <BarChart3 className="h-4 w-4" />
+              <span>Rating Management</span>
+              <Badge className="ml-2" variant="secondary">{ratings.length}</Badge>
+            </TabsTrigger>
           </TabsList>
 
           {/* Users Tab */}
@@ -659,24 +707,48 @@ export default function AdminDashboard() {
                         />
                       </div>
 
-                      {/* Owner Selection */}
                       <div className="grid grid-cols-4 items-center gap-4">
-                        <Label className="text-right">Owner</Label>
+                        <Label className="text-right text-gray-700">Owner</Label>
                         <Select onValueChange={(val) => setNewStore({ ...newStore, owner_id: val })}>
-                          <SelectTrigger className="col-span-3">
+                          <SelectTrigger className="col-span-3 bg-white/80 backdrop-blur border border-gray-200 hover:border-gray-300 focus:ring-2 focus:ring-indigo-200">
                             <SelectValue placeholder="Select store owner" />
                           </SelectTrigger>
-                          <SelectContent>
-                            {users.map((user) => (
-                              user.role === "OWNER" && (
-                              <SelectItem 
-                                key={getUserId(user)} 
-                                value={String(getUserId(user))}
-                              >
-                                {user.name} ({user.email})
-                              </SelectItem>
-                            ))
-                          )}
+                          <SelectContent className="bg-white border border-gray-200 shadow-md">
+                            {users.filter(user => user.role === "OWNER").length > 0 ? (
+                              users
+                                .filter(user => user.role === "OWNER")
+                                .map((user) => (
+                                  <SelectItem 
+                                    key={getUserId(user)} 
+                                    value={String(getUserId(user))}
+                                    className="hover:bg-indigo-50"
+                                  >
+                                    {user.name} ({user.email})
+                                  </SelectItem>
+                                ))
+                            ) : (
+                              <>
+                                <SelectItem value="no-owners" disabled className="text-gray-400">
+                                  No owners available
+                                </SelectItem>
+                                {users.length > 0 && (
+                                  <>
+                                    <SelectItem value="separator" disabled className="text-gray-400">
+                                      --- All Users ---
+                                    </SelectItem>
+                                    {users.map((user) => (
+                                      <SelectItem 
+                                        key={getUserId(user)} 
+                                        value={String(getUserId(user))}
+                                        className="hover:bg-indigo-50"
+                                      >
+                                        {user.name} ({user.email}) - {user.role || 'USER'}
+                                      </SelectItem>
+                                    ))}
+                                  </>
+                                )}
+                              </>
+                            )}
                           </SelectContent>
                         </Select>
                       </div>
