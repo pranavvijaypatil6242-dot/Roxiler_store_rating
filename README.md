@@ -56,4 +56,3 @@ npm run preview
 * **System Administrator**: log in, manage stores and users, view dashboards and listings.
 * **Store Owner**: log in, view users who rated their store, check average rating.
 
-660aa53968afd0605
